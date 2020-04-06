@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboardNav"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.viceboy.babble.ui.screens.dashboard.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_addGroupFragment"
+            app:destination="@id/addGroupFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_down"
+            app:popUpTo="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_add_expense"
+            app:destination="@id/add_expense"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_down"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_groupDetailsFragment"
+            app:destination="@id/groupDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="false">
+            <argument
+                android:name="group"
+                app:argType="com.viceboy.data_repo.model.uiModel.DashboardGroup" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/addGroupFragment"
+        android:name="com.viceboy.babble.ui.screens.addGroup.AddGroupFragment"
+        android:label="Add a new group" />
+
+    <include app:graph="@navigation/add_expense" />
+    <action
+        android:id="@+id/action_global_add_expense"
+        app:destination="@id/add_expense"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popExitAnim="@anim/slide_out_down">
+        <argument
+            android:name="photo_file"
+            app:argType="android.net.Uri" />
+    </action>
+    <fragment
+        android:id="@+id/groupDetailsFragment"
+        android:name="com.viceboy.babble.ui.screens.groupDetails.GroupDetailsFragment"
+        android:label="GroupDetailsFragment">
+        <argument
+            android:name="group"
+            app:argType="com.viceboy.data_repo.model.uiModel.DashboardGroup" />
+        <action
+            android:id="@+id/action_groupDetailsFragment_to_expenseDetailsFragment"
+            app:destination="@id/expenseDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+
+            <argument
+                android:name="expense"
+                app:argType="com.viceboy.data_repo.model.uiModel.GroupExpense" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/expenseDetailsFragment"
+        android:name="com.viceboy.babble.ui.screens.expenseDetails.ExpenseDetailsFragment"
+        android:label="ExpenseDetailsFragment">
+
+        <argument
+            android:name="expense"
+            app:argType="com.viceboy.data_repo.model.uiModel.GroupExpense" />
+    </fragment>
+</navigation>

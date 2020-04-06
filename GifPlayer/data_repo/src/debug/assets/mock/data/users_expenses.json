@@ -1,0 +1,44 @@
+{
+  "expenses": {
+    "sYOb8HISfISexUjCXidG34nGzD72": {
+      "item_name": "Shopping",
+      "expense_image_url": "https://avatars2.githubusercontent.com/u/1269832?v=4",
+      "expense_date": 1581237508306,
+      "amount_paid": 300,
+      "currency": "INR",
+      "group_id": "ML5KeWuu4V8AVjSFd1TQ",
+      "paid_by": "KppGjUJPjdXq3bAJ2HneiL3Her23",
+      "paid_for": [
+        {
+          "3qOzMCDPq6d6VTfzMv7HkKm8ifo2": 100
+        },
+        {
+          "0IkpreLTzQR8b5oXMgR1SV2EvWr2": 140
+        },
+        {
+          "KppGjUJPjdXq3bAJ2HneiL3Her23": 60
+        }
+      ]
+    },
+    "t8uXnaF6APN2YELkmWMyHgufK8s1": {
+      "item_name": "Deep Dive To Goa",
+      "expense_image_url": "https://avatars0.githubusercontent.com/u/813492?v=4",
+      "expense_date": 1581238639303,
+      "amount_paid": 150,
+      "currency": "USD",
+      "group_id": "luKasxuFEqbqkagEe00q",
+      "paid_by": "3qOzMCDPq6d6VTfzMv7HkKm8ifo2",
+      "paid_for": [
+        {
+          "3qOzMCDPq6d6VTfzMv7HkKm8ifo2": 50
+        },
+        {
+          "KppGjUJPjdXq3bAJ2HneiL3Her23": 50
+        },
+        {
+          "81AcdqBlwiXemmLkBZqmTjDYsYk1": 50
+        }
+      ]
+    }
+  }
+}

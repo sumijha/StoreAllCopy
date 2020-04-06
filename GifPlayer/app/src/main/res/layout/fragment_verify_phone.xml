@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.viceboy.data_repo.model.dataModel.User" />
+
+        <import type="android.view.View" />
+
+        <import type="com.viceboy.babble.ui.state.OtpVerificationState" />
+
+        <import type="com.viceboy.babble.ui.state.ButtonState" />
+
+        <import type="com.viceboy.babble.ui.screens.verifyPhone.VerifyPhoneViewModel" />
+
+        <variable
+            name="user"
+            type="com.viceboy.data_repo.model.dataModel.User" />
+
+        <variable
+            name="showProgressTimer"
+            type="Boolean" />
+
+        <variable
+            name="getOtpButtonState"
+            type="ButtonState" />
+
+        <variable
+            name="verifyOtpButtonState"
+            type="ButtonState" />
+
+        <variable
+            name="verifyViewModel"
+            type="VerifyPhoneViewModel" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/root_container_verifyPhone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_login"
+            tools:context=".ui.screens.verifyPhone.VerifyPhoneFragment">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_end="30dp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_begin="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <FrameLayout
+                android:id="@+id/flLotContainer"
+                android:layout_width="@dimen/lotImg_Otp_dimen"
+                android:layout_height="@dimen/lotImg_Otp_dimen"
+                android:layout_marginTop="60dp"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/LotVerifyPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{verifyViewModel.otpVerificationStateLiveData==OtpVerificationState.SUCCESS?View.GONE:View.VISIBLE}"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="anime/verify_otp.json"
+                    app:lottie_loop="false" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lotOtpVerified"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:visibility="@{verifyViewModel.otpVerificationStateLiveData==OtpVerificationState.SUCCESS?View.VISIBLE:View.GONE}"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="anime/otp_verified.json"
+                    app:lottie_loop="false" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvVerification"
+                style="@style/VerifyPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@{verifyViewModel.otpVerificationStateLiveData==OtpVerificationState.SUCCESS?@string/verified:@string/verification}"
+                android:visibility="invisible"
+                app:animateVisibility="@{true}"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@+id/flLotContainer" />
+
+            <FrameLayout
+                android:id="@+id/flOtpInfoContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvVerification">
+
+                <TextView
+                    android:id="@+id/tvOtpInfo"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/voces_regular"
+                    android:gravity="center"
+                    android:text="@string/verificationInfo"
+                    android:textColor="@color/color_text_primary"
+                    android:visibility="@{(getOtpButtonState == ButtonState.INVISIBLE)?View.GONE:View.VISIBLE}" />
+
+                <TextView
+                    android:id="@+id/tvOtpSentInfo"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/voces_regular"
+                    android:gravity="center"
+                    android:text="@{verifyViewModel.otpVerificationSubHeaderTextLiveData}"
+                    android:textColor="@color/color_text_primary"
+                    android:visibility="@{getOtpButtonState == ButtonState.INVISIBLE?View.VISIBLE:View.GONE}" />
+
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/flContainerInputText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:visibility="@{verifyViewModel.otpVerificationStateLiveData==OtpVerificationState.SUCCESS?View.INVISIBLE:View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/flOtpInfoContainer">
+
+                <EditText
+                    android:id="@+id/etCountryCode"
+                    style="@style/AutoComplete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:enabled="false"
+                    android:fontFamily="@font/voces_regular"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:labelFor="@id/etCountryCode"
+                    android:text="@{user.countryCode}"
+                    android:textColor="@color/color_text_primary"
+                    android:visibility="@{getOtpButtonState == ButtonState.INVISIBLE?View.GONE:View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tilVerifyPhone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="+91" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilVerifyPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:theme="@style/TextInputLayoutAppearance"
+                    android:visibility="@{getOtpButtonState == ButtonState.INVISIBLE?View.GONE:View.VISIBLE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/etCountryCode"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etVerifyPhone"
+                        style="@style/TextEditInputAppearance"
+                        android:hint="@string/phone"
+                        android:inputType="textEmailAddress"
+                        android:text="@{user.phone}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.chaos.view.PinView
+                    android:id="@+id/pvEnterOTP"
+                    style="@style/PinWidget.PinView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:cursorVisible="true"
+                    android:inputType="number"
+                    android:text="@={verifyViewModel.mutablePinViewOtpTextLiveData}"
+                    android:textColor="@color/colorAccent"
+                    android:textColorHighlight="@color/colorAccent"
+                    android:textSize="18sp"
+                    android:visibility="@{getOtpButtonState == ButtonState.INVISIBLE?View.VISIBLE:View.GONE}"
+                    app:cursorColor="@color/colorAccent"
+                    app:cursorWidth="2dp"
+                    app:itemCount="6"
+                    app:itemHeight="40dp"
+                    app:itemSpacing="8dp"
+                    app:itemWidth="35dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:lineColor="@color/colorPrimaryDark"
+                    app:lineWidth="2dp"
+                    app:viewType="line" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:id="@+id/flVerifyButtonContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/flContainerInputText">
+
+                <Button
+                    android:id="@+id/btn_getOtp"
+                    style="@style/SignUpInButton"
+                    android:background="@{getOtpButtonState==ButtonState.DISABLE?@drawable/bg_button_disabled:@drawable/bg_button}"
+                    android:clickable="@{getOtpButtonState == ButtonState.ACTIVE}"
+                    android:onClick="@{() -> verifyViewModel.onGetOtpButtonClicked()}"
+                    android:text="@string/getOtp"
+                    android:visibility="@{getOtpButtonState == ButtonState.INVISIBLE?View.GONE:View.VISIBLE}"
+                    app:buttonAnimationListener="@{verifyViewModel.getOtpButtonAnimatorListener}"
+                    app:onClickWithValidFields="@{getOtpButtonState == ButtonState.CLICKED}" />
+
+                <Button
+                    android:id="@+id/btn_verifyOtp"
+                    style="@style/SignUpInButton"
+                    android:background="@{verifyOtpButtonState==ButtonState.DISABLE?@drawable/bg_button_disabled:@drawable/bg_button}"
+                    android:clickable="@{verifyOtpButtonState == ButtonState.ACTIVE}"
+                    android:onClick="@{() -> verifyViewModel.onVerifyOtpButtonClicked()}"
+                    android:text="@string/verify_and_create_account"
+                    android:visibility="@{verifyOtpButtonState == ButtonState.INVISIBLE?View.GONE:View.VISIBLE}"
+                    app:buttonAnimationListener="@{verifyViewModel.verifyOtpButtonAnimatorListener}"
+                    app:onClickWithValidFields="@{verifyOtpButtonState == ButtonState.CLICKED}" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flProgressContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/flVerifyButtonContainer">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/pbVerifyOtp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="@{verifyViewModel.otpVerificationStateLiveData==OtpVerificationState.SUCCESS?View.VISIBLE:View.GONE}"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="anime/progress_green.json"
+                    app:lottie_loop="true" />
+
+                <FrameLayout
+                    android:id="@+id/frameLytTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="@{verifyViewModel.enableOtpProgressTimerLiveData ?View.VISIBLE:View.GONE}">
+
+                    <ProgressBar
+                        android:id="@+id/pbOtpTimeout"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_progress_shape"
+                        android:indeterminate="false"
+                        android:max="30"
+                        android:progress="@{verifyViewModel.progressLiveData}"
+                        android:progressDrawable="@drawable/bg_progress_circular"
+                        android:secondaryProgress="0" />
+
+                    <TextView
+                        android:id="@+id/tvTimeout"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@{verifyViewModel.progressLiveData.toString()}" />
+                </FrameLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flMessageContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/flProgressContainer">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:onClick="@{() -> verifyViewModel.requestOtp()}"
+                    android:orientation="horizontal"
+                    android:visibility="@{verifyViewModel.resendOtpTextLiveData?View.VISIBLE:View.GONE}">
+
+                    <TextView
+                        android:id="@+id/tvNewUserLink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/voces_regular"
+                        android:text="@string/didnot_receive_otp"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        android:textColor="@color/color_text_primary" />
+
+                    <TextView
+                        android:id="@+id/tvSignUpLink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/voces_regular"
+                        android:lines="1"
+                        android:text="@string/resend_sms"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvOtpSentErrorMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/voces_regular"
+                    android:gravity="center"
+                    android:lines="2"
+                    android:padding="2dp"
+                    android:text="@{verifyViewModel.errorTextPlaceholderLiveData}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:textColor="@color/color_error"
+                    android:visibility="@{verifyViewModel.showErrorMsgLiveData?View.VISIBLE:View.GONE}" />
+
+                <TextView
+                    android:id="@+id/tvInfoAccountCreate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/voces_regular"
+                    android:gravity="center"
+                    android:lines="2"
+                    android:padding="2dp"
+                    android:text="@string/creating_account"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:textColor="@color/color_text_primary"
+                    android:visibility="@{verifyViewModel.otpVerificationStateLiveData==OtpVerificationState.SUCCESS?View.VISIBLE:View.GONE}" />
+
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

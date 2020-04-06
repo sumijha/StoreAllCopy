@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_expense"
+    app:startDestination="@id/addExpenseFragment">
+
+    <fragment
+        android:id="@+id/addExpenseFragment"
+        android:name="com.viceboy.babble.ui.screens.addExpense.AddExpenseFragment"
+        android:label="AddExpenseFragment">
+        <action
+            android:id="@+id/action_addExpenseFragment_to_captureExpensePreviewFragment"
+            app:destination="@id/captureExpensePreviewFragment" />
+        <action
+            android:id="@+id/action_addExpenseFragment_to_selectDateFragment"
+            app:destination="@id/selectDateFragment" />
+        <argument
+            android:name="photo_file"
+            app:argType="android.net.Uri" />
+        <argument
+            android:name="fromScreen"
+            app:argType="java.lang.String"/>
+    </fragment>
+    <fragment
+        android:id="@+id/captureExpensePreviewFragment"
+        android:name="com.viceboy.babble.ui.screens.captureExpense.CaptureExpensePreviewFragment"
+        android:label="CaptureExpensePreviewFragment">
+        <argument
+            android:name="photo_file"
+            app:argType="android.net.Uri" />
+    </fragment>
+    <dialog
+        android:id="@+id/selectDateFragment"
+        android:name="com.viceboy.babble.ui.screens.addExpense.dialog.SelectDateFragment"
+        android:label="SelectDateFragment" />
+</navigation>

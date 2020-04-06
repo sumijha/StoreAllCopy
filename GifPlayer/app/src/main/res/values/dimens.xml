@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_start_login">30dp</dimen>
+    <dimen name="margin_start_login_logo">20dp</dimen>
+    <dimen name="login_margin_top_headline">5dp</dimen>
+    <dimen name="login_margin_top_logo">25dp</dimen>
+    <dimen name="login_margin_button_bottom">80dp</dimen>
+    <dimen name="login_margin_top_signup">10dp</dimen>
+    <dimen name="login_margin_button_bottom_signup">50dp</dimen>
+    <dimen name="login_margin_button_bottom_progressBar">40dp</dimen>
+    <dimen name="login_logo_height">80dp</dimen>
+    <dimen name="login_logo_width">80dp</dimen>
+    <dimen name="lotImg_Otp_dimen">160dp</dimen>
+    <dimen name="avatar_initial_width">100dp</dimen>
+    <dimen name="avatar_initial_height">86dp</dimen>
+    <dimen name="avatar_final_height">32dp</dimen>
+    <dimen name="image_final_width">50dp</dimen>
+    <dimen name="toolbar_button_width">150dp</dimen>
+    <dimen name="toolbar_button_height">30dp</dimen>
+    <dimen name="round_button_small_x">32dp</dimen>
+    <dimen name="margin_xxsmall">12dp</dimen>
+    <dimen name="margin_xsmall">16dp</dimen>
+    <dimen name="margin_small">32dp</dimen>
+    <dimen name="stroke_medium">8dp</dimen>
+    <dimen name="split_menu_width">150dp</dimen>
+    <dimen name="error_border">4dp</dimen>
+</resources>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.viceboy.babble.ui.screens.dashboard.DashboardViewModel" />
+
+        <import type="com.viceboy.babble.ui.state.ButtonState" />
+
+        <import type="android.view.View" />
+
+        <import type="android.view.View.OnTouchListener" />
+
+        <import type="androidx.lifecycle.LiveData" />
+
+        <variable
+            name="dashViewModel"
+            type="DashboardViewModel" />
+
+        <variable
+            name="animeFlag"
+            type="Boolean" />
+
+        <variable
+            name="addExpenseNavDirections"
+            type="androidx.navigation.NavDirections" />
+
+        <variable
+            name="addGroupNavDirections"
+            type="androidx.navigation.NavDirections" />
+
+        <variable
+            name="fabMenuTouchListener"
+            type="OnTouchListener" />
+
+        <variable
+            name="mainFabState"
+            type="ButtonState" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_fab_options"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="6dp"
+        app:onFabMenuOpenedTouchListener="@{fabMenuTouchListener}">
+
+        <TextView
+            android:id="@+id/textview_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="24dp"
+            android:background="#212121"
+            android:padding="8dp"
+            android:text="@string/add_new_expense"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:animatorType="@{mainFabState == ButtonState.CLICKED ? `open`:`close`}"
+            app:animeFab="@{animeFlag}"
+            app:layout_constraintBottom_toTopOf="@+id/textview_mail"
+            app:layout_constraintEnd_toStartOf="@+id/fabAddExpense"
+            app:layout_constraintTop_toTopOf="@+id/fabAddExpense" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/white"
+            android:elevation="16dp"
+            android:onClick="@{() -> dashViewModel.navigateTo(addExpenseNavDirections.actionId)}"
+            android:src="@drawable/ic_monetization_on"
+            android:visibility="invisible"
+            app:animatorType="@{mainFabState == ButtonState.CLICKED ? `open`:`close`}"
+            app:animeFab="@{animeFlag}"
+            app:fabSize="auto"
+            app:layout_constraintBottom_toTopOf="@id/fabAddGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:pressedTranslationZ="12dp"
+            app:tint="@null" />
+
+
+        <TextView
+            android:id="@+id/textview_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:background="#212121"
+            android:padding="8dp"
+            android:text="@string/add_new_group"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:animatorType="@{mainFabState == ButtonState.CLICKED ? `open`:`close`}"
+            app:animeFab="@{animeFlag}"
+            app:layout_constraintBottom_toBottomOf="@+id/fabShowOptions"
+            app:layout_constraintEnd_toStartOf="@+id/fabAddGroup"
+            app:layout_constraintTop_toTopOf="@+id/fabAddExpense"
+            app:layout_constraintVertical_bias="0.512" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/white"
+            android:elevation="16dp"
+            android:onClick="@{() -> dashViewModel.navigateTo(addGroupNavDirections.actionId)}"
+            android:src="@drawable/ic_group_add_black"
+            android:visibility="invisible"
+            app:animatorType="@{mainFabState == ButtonState.CLICKED ? `open`:`close`}"
+            app:animeFab="@{animeFlag}"
+            app:fabSize="auto"
+            app:layout_constraintBottom_toTopOf="@id/fabShowOptions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:pressedTranslationZ="12dp"
+            app:tint="@null" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabShowOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="60dp"
+            android:elevation="16dp"
+            android:onClick="@{() -> dashViewModel.onFabShowOptionsClicked()}"
+            android:src="@drawable/ic_add"
+            app:animatorType="@{mainFabState == ButtonState.CLICKED ? `rotateClock`:`rotateAntiClock`}"
+            app:animeFab="@{animeFlag}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:pressedTranslationZ="12dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

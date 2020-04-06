@@ -1,0 +1,23 @@
+[
+  {
+    "email": "test1@gmail.com",
+    "password": "1234556",
+    "name": "testUser",
+    "phone": 880023,
+    "avatar_url": "https://avatars2.githubusercontent.com/u/1269832?v=4"
+  },
+  {
+    "email": "test2@gmail.com",
+    "password": "1234556",
+    "name": "testUser1",
+    "phone": 880023,
+    "avatar_url": "https://avatars0.githubusercontent.com/u/813492?v=4"
+  },
+  {
+    "email": "test3@gmail.com",
+    "password": "1234556",
+    "name": "testUser2",
+    "phone": 880023,
+    "avatar_url": "https://avatars0.githubusercontent.com/u/1000778?v=4"
+  }
+]

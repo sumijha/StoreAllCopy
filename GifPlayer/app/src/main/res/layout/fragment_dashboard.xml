@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="androidx.lifecycle.LiveData" />
+
+        <import type="androidx.appcompat.widget.Toolbar.OnMenuItemClickListener" />
+
+        <import type="com.viceboy.babble.ui.screens.dashboard.DashboardViewModel" />
+
+        <import type="com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener" />
+
+        <import type="com.viceboy.babble.ui.state.ButtonState" />
+
+        <import type="com.viceboy.data_repo.model.dataModel.Expense" />
+
+        <import type="androidx.recyclerview.widget.RecyclerView.OnScrollListener" />
+
+        <variable
+            name="dashViewModel"
+            type="DashboardViewModel" />
+
+        <variable
+            name="isDataLoading"
+            type="Boolean" />
+
+        <variable
+            name="showDashboard"
+            type="Boolean" />
+
+        <variable
+            name="isExpenseFoundInCurrentYr"
+            type="Boolean" />
+
+        <variable
+            name="scrollToTopFabVisibility"
+            type="Boolean" />
+
+        <variable
+            name="startAnimationFlag"
+            type="Boolean" />
+
+        <variable
+            name="user"
+            type="com.viceboy.data_repo.model.dataModel.User" />
+
+        <variable
+            name="userLatestExpense"
+            type="com.viceboy.data_repo.model.uiModel.DashboardExpense" />
+
+        <variable
+            name="menuItemListener"
+            type="OnMenuItemClickListener" />
+
+        <variable
+            name="onAppBarOffSetChangeListener"
+            type="OnOffsetChangedListener" />
+
+        <variable
+            name="newExpenseNavDirections"
+            type="androidx.navigation.NavDirections" />
+
+        <variable
+            name="newGroupNavDirections"
+            type="androidx.navigation.NavDirections" />
+
+        <variable
+            name="fabButtonState"
+            type="ButtonState" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/flRootDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/placeholder_no_data"
+            layout="@layout/layout_placeholder_no_data_dashboard"
+            android:visibility="@{showDashboard?View.GONE:View.VISIBLE}" />
+
+        <include
+            android:id="@+id/placeholder_data_load"
+            layout="@layout/layout_loading_data"
+            android:visibility="@{isDataLoading?View.VISIBLE:View.GONE}" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/root_layout_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_login"
+            android:visibility="@{showDashboard?View.VISIBLE:View.GONE}"
+            tools:context=".ui.screens.dashboard.DashboardFragment">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_login"
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+                app:offSetChangeListener="@{onAppBarOffSetChangeListener}">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collapsing_toolbar_dashboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@drawable/bg_login"
+                    android:fitsSystemWindows="true"
+                    app:contentScrim="?attr/colorAccent"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+                    <RelativeLayout
+                        android:id="@+id/root_container_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tvDashboard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-condensed-light"
+                            android:gravity="center"
+                            android:padding="4dp"
+                            android:text="@string/dashboard"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:visibility="@{userLatestExpense.itemName == null?View.VISIBLE:View.GONE}"
+                            app:nullSpanText='@{@string/no_expense_added_yet}' />
+
+                        <LinearLayout
+                            android:id="@+id/container_text_data"
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="1dp"
+                            android:paddingBottom="2dp"
+                            android:visibility="@{userLatestExpense.itemName == null?View.GONE:View.VISIBLE}"
+                            app:layout_collapseMode="parallax">
+
+                            <TextView
+                                android:id="@+id/tvHeaderQuickPeek"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="56dp"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="@string/quick_insights"
+                                android:textColor="@color/color_text_primary"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="52dp"
+                                android:layout_height="5dp"
+                                android:layout_marginStart="2dp"
+                                android:background="@drawable/bg_button" />
+
+                            <FrameLayout
+                                android:id="@+id/flUserLastExpenseText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="24dp">
+
+                                <LinearLayout
+                                    android:id="@+id/container_textView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:paddingStart="2dp"
+                                    android:paddingEnd="1dp"
+                                    android:visibility="@{userLatestExpense.itemName == null ? View.GONE:View.VISIBLE}">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="sans-serif-condensed-medium"
+                                        android:text="@string/last_expense_added"
+                                        android:textColor="@color/color_text_primary"
+                                        android:textSize="14sp"
+                                        android:textStyle="bold"
+                                        tools:text="Last Expense added:" />
+
+                                    <TextView
+                                        android:id="@+id/tvInsightItemName"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="12dp"
+                                        android:ellipsize="end"
+                                        android:fontFamily="sans-serif-condensed-light"
+                                        android:singleLine="true"
+                                        android:textSize="12sp"
+                                        app:expenseSpanText='@{"Item Name:"+" "+userLatestExpense.itemName}'
+                                        tools:text="Item Name: MotorBoat Ride" />
+
+                                    <TextView
+                                        android:id="@+id/tvInsightExpenseDate"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:ellipsize="end"
+                                        android:fontFamily="sans-serif-condensed-light"
+                                        android:singleLine="true"
+                                        android:textSize="12sp"
+                                        app:expenseSpanText='@{"Date: "+userLatestExpense.expenseDate}'
+                                        tools:text="Date: 12/08/2020" />
+
+                                    <TextView
+                                        android:id="@+id/tvInsightExpenseAmnt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:ellipsize="end"
+                                        android:fontFamily="sans-serif-condensed-light"
+                                        android:singleLine="true"
+                                        android:textSize="12sp"
+                                        app:expenseSpanText='@{"Currency: "+userLatestExpense.inCurrency+" "+Math.abs(userLatestExpense.itemAmount)}'
+                                        tools:text="Amount: 120.00 USD" />
+
+                                    <TextView
+                                        android:id="@+id/tvInsightGroup"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:ellipsize="end"
+                                        android:fontFamily="sans-serif-condensed-light"
+                                        android:singleLine="true"
+                                        android:textSize="12sp"
+                                        app:expenseSpanText='@{"Group: "+userLatestExpense.inGroup}'
+                                        tools:text="Group: Trip to Goa" />
+
+                                </LinearLayout>
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/container_pie_chart"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="56dp"
+                            android:layout_toEndOf="@id/container_text_data"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:visibility="@{userLatestExpense.itemName == null ? View.GONE:View.VISIBLE}">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:visibility="@{isExpenseFoundInCurrentYr?View.VISIBLE:View.GONE}">
+
+                                <ImageButton
+                                    android:id="@+id/ibLeft"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/ic_chevron_left_grey"
+                                    android:onClick="@{() -> dashViewModel.onCurrencySelectorPreviousClick()}" />
+
+                                <TextView
+                                    android:id="@+id/tvBarCurrency"
+                                    android:layout_width="64dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-condensed-medium"
+                                    android:gravity="center_horizontal"
+                                    android:paddingStart="16dp"
+                                    android:paddingEnd="16dp"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textStyle="bold"
+                                    tools:text="INR" />
+
+                                <ImageButton
+                                    android:id="@+id/ibRight"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/ic_chevron_right_grey"
+                                    android:onClick="@{() -> dashViewModel.onCurrencySelectorNextClick()}" />
+                            </LinearLayout>
+
+                            <com.github.mikephil.charting.charts.BarChart
+                                android:id="@+id/barChart"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <LinearLayout
+                android:id="@+id/root_items"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="80dp"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+                <RelativeLayout
+                    android:id="@+id/tabContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvGroups"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_left_tab_header"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{() -> dashViewModel.onGroupTabSelected()}"
+                        android:padding="10dp"
+                        android:text="@string/groups"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:isSelectable="@{dashViewModel.onGroupTabClickedLiveData}" />
+
+                    <TextView
+                        android:id="@+id/tvMembers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/tvGroups"
+                        android:background="@drawable/bg_right_tab_header"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{() -> dashViewModel.onMemberTabSelected()}"
+                        android:padding="10dp"
+                        android:text="@string/members"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:isSelectable="@{!dashViewModel.onGroupTabClickedLiveData}" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabScrollUp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="12dp"
+                        android:elevation="2dp"
+                        android:foreground="@drawable/ic_arrow_upward_white"
+                        android:foregroundGravity="center"
+                        android:visibility="@{scrollToTopFabVisibility?View.VISIBLE:View.GONE}"
+                        app:fabSize="mini"
+                        tools:ignore="RelativeOverlap" />
+                </RelativeLayout>
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/nsvRecyclerItemContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_dashboard_recycler_view"
+                    android:padding="2dp">
+
+                    <FrameLayout
+                        android:id="@+id/flRecyclerItemContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvGroupList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="LinearLayoutManager"
+                            tools:listitem="@layout/item_dashboard_groups_tab" />
+                    </FrameLayout>
+
+                </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_below="@id/container_pie_chart"
+                android:gravity="top"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_anchor="@id/root_container_data"
+                app:layout_anchorGravity="bottom"
+                app:menu="@menu/dashboard_menu"
+                app:onMenuItemListener="@{menuItemListener}">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="@dimen/image_final_width"
+                        android:layout_height="@dimen/image_final_width" />
+
+                    <TextView
+                        android:id="@+id/tvToolbar_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
+                        android:text='@{user.name.split(" ")[0]}'
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civProfilePhoto"
+                android:layout_width="@dimen/avatar_initial_width"
+                android:layout_height="@dimen/avatar_initial_height"
+                android:layout_marginStart="20dp"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="2dp"
+                app:imageFromUrl="@{user.avatar_url}"
+                app:layout_anchor="@id/toolbar_dashboard"
+                app:layout_anchorGravity="center|start"
+                tools:src="@drawable/avatar_sample" />
+
+
+            <include
+                android:id="@+id/dash_fab_menu"
+                layout="@layout/content_fab_menu"
+                android:layout_width="399dp"
+                android:layout_height="match_parent"
+                app:animeFlag="@{startAnimationFlag}"
+                app:mainFabState="@{fabButtonState}" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </FrameLayout>
+</layout>

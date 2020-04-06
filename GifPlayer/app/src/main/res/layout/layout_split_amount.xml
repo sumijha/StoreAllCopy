@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="addExpenseViewModel"
+            type="com.viceboy.babble.ui.screens.addExpense.AddExpenseViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="@string/split_amount"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp"
+            android:textColor="@color/color_text_primary"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radEqually"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/equally"
+                android:textColor="@color/color_text_primary"
+                android:textSize="14sp"
+                android:checked="@={addExpenseViewModel.mutableSplitAmountEquallyRadLiveData}"
+                android:textStyle="bold|italic" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/blue_grey" />
+
+            <RadioButton
+                android:id="@+id/radUnequally"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/unequally"
+                android:textColor="@color/color_text_primary"
+                android:textSize="14sp"
+                android:checked="@={addExpenseViewModel.mutableSplitAmountUnequallyRadLiveData}"
+                android:textStyle="bold|italic" />
+        </RadioGroup>
+    </LinearLayout>
+</layout>

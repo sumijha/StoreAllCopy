@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_red_dark"
+        android:padding="12dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_error_outline_white" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/voces_regular"
+        android:text="An error occurred while creating new expense"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textColor="@color/color_text_primary"
+        android:textStyle="bold|italic" />
+
+    <com.viceboy.babble.ui.custom.widgets.CustomErrorView
+        android:id="@+id/errorItemDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:errorIcon="@drawable/ic_error_outline_white"
+        app:errorMsg="Item description is required"
+        app:errorStrokeColor="@android:color/holo_red_light"
+        app:errorStrokeWidth="1dp"
+        app:errorTextColor="@android:color/holo_red_light"
+        app:iconBackground="@android:color/holo_red_light" />
+
+    <com.viceboy.babble.ui.custom.widgets.CustomErrorView
+        android:id="@+id/errorItemDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:errorIcon="@drawable/ic_date_error_white"
+        app:errorMsg="Date is required"
+        app:errorStrokeColor="@android:color/holo_red_light"
+        app:errorStrokeWidth="1dp"
+        app:errorTextColor="@android:color/holo_red_light"
+        app:iconBackground="@android:color/holo_red_light" />
+
+    <com.viceboy.babble.ui.custom.widgets.CustomErrorView
+        android:id="@+id/errorGroupNotSelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:errorIcon="@drawable/ic_group_add_white"
+        app:errorMsg="Please select one group in order to add expense"
+        app:errorStrokeColor="@android:color/holo_red_light"
+        app:errorStrokeWidth="1dp"
+        app:errorTextColor="@android:color/holo_red_light"
+        app:iconBackground="@android:color/holo_red_light" />
+
+    <com.viceboy.babble.ui.custom.widgets.CustomErrorView
+        android:id="@+id/errorExpenseOwnerNotSelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:errorIcon="@drawable/ic_person_white"
+        app:errorMsg="Please select expense owner"
+        app:errorStrokeColor="@android:color/holo_red_light"
+        app:errorStrokeWidth="1dp"
+        app:errorTextColor="@android:color/holo_red_light"
+        app:iconBackground="@android:color/holo_red_light" />
+
+    <com.viceboy.babble.ui.custom.widgets.CustomErrorView
+        android:id="@+id/errorExpenseParticipantsNotSelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:errorIcon="@drawable/ic_money_error_white"
+        app:errorMsg="Cumulative amount cannot be zero"
+        app:errorStrokeColor="@android:color/holo_red_light"
+        app:errorStrokeWidth="1dp"
+        app:errorTextColor="@android:color/holo_red_light"
+        app:iconBackground="@android:color/holo_red_light" />
+
+    <Button
+        android:layout_width="62dp"
+        android:layout_height="42dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/holo_red_light"
+        android:elevation="4dp"
+        android:text="@string/retry"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+</LinearLayout>

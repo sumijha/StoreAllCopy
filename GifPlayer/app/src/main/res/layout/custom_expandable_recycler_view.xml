@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_custom_expandedRecyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/container_expanded_RecyclerView"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="54dp">
+
+        <ImageView
+            android:id="@+id/ivCustomResRvIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/selectable_dropdown_image" />
+
+        <TextView
+            android:id="@+id/tvExpandableViewRvHeader"
+            android:textColor="@color/color_text_primary"
+            android:layout_weight="1"
+            android:fontFamily="@font/voces_regular"
+            android:textSize="16sp"
+            android:paddingTop="4dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="4dp"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Select Item Name"/>
+
+        <ImageView
+            android:id="@+id/ivRvDropdown"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_arrow_drop_down"
+            android:contentDescription="@string/selectable_dropdown_image" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCustomExpandableView"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_new_expense_amount_paid_by_list"/>
+</LinearLayout>

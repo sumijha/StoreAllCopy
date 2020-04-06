@@ -1,0 +1,79 @@
+{
+  "expenses": {
+    "sYOb8HISfISexUjCXidG34nGzD72": {
+      "id": "sYOb8HISfISexUjCXidG34nGzD72",
+      "itemName": "Shopping",
+      "expenseImageUrl": "",
+      "expenseDate": 1581237508306,
+      "amountPaid": 300,
+      "currency": "INR",
+      "groupId": "ML5KeWuu4V8AVjSFd1TQ",
+      "expenseOwner": "KppGjUJPjdXq3bAJ2HneiL3Her23",
+      "expenseSharedBy": {
+        "3qOzMCDPq6d6VTfzMv7HkKm8ifo2": 100,
+        "0IkpreLTzQR8b5oXMgR1SV2EvWr2": 140,
+        "KppGjUJPjdXq3bAJ2HneiL3Her23": 60
+      }
+    },
+    "t8uXnaF6APN2YELkmWMyHgufK8s1": {
+      "id": "t8uXnaF6APN2YELkmWMyHgufK8s1",
+      "itemName": "Deep To Goa",
+      "expenseImageUrl": "",
+      "expenseDate": 1581238639303,
+      "amountPaid": 150,
+      "currency": "USD",
+      "groupId": "luKasxuFEqbqkagEe00q",
+      "expenseOwner": "3qOzMCDPq6d6VTfzMv7HkKm8ifo2",
+      "expenseSharedBy": {
+        "3qOzMCDPq6d6VTfzMv7HkKm8ifo2": 50,
+        "KppGjUJPjdXq3bAJ2HneiL3Her23": 50,
+        "81AcdqBlwiXemmLkBZqmTjDYsYk1": 50
+      }
+    },
+    "oluXnaF6APN2YELkmWMyHgufK8s1": {
+      "id": "oluXnaF6APN2YELkmWMyHgufK8s1",
+      "itemName": "Dinner in Dine10",
+      "expenseImageUrl": "https://img.favpng.com/16/1/21/euclidean-vector-shopping-cart-icon-png-favpng-ghFUJmh1QzFa9DLPysrWc4gm8.jpg",
+      "expenseDate": 1581238639303,
+      "amountPaid": 150,
+      "currency": "INR",
+      "groupId": "pruKasxuFEqbqkagEe00q",
+      "expenseOwner": "81AcdqBlwiXemmLkBZqmTjDYsYk1",
+      "expenseSharedBy": {
+        "3qOzMCDPq6d6VTfzMv7HkKm8ifo2": 50,
+        "KppGjUJPjdXq3bAJ2HneiL3Her23": 50,
+        "81AcdqBlwiXemmLkBZqmTjDYsYk1": 50
+      }
+    },
+    "jhYiF6APN2YELkmWMyHguf32j": {
+      "id": "jhYiF6APN2YELkmWMyHguf32j",
+      "itemName": "Dinner in Zomato",
+      "expenseImageUrl": "",
+      "expenseDate": 1585457274144,
+      "amountPaid": 200,
+      "currency": "INR",
+      "groupId": "pruKasxuFEqbqkagEe00q",
+      "expenseOwner": "3qOzMCDPq6d6VTfzMv7HkKm8ifo2",
+      "expenseSharedBy": {
+        "3qOzMCDPq6d6VTfzMv7HkKm8ifo2": 40,
+        "KppGjUJPjdXq3bAJ2HneiL3Her23": 60,
+        "81AcdqBlwiXemmLkBZqmTjDYsYk1": 100
+      }
+    },
+    "b2vg45ePN2YELkmWMyHdf1i0j": {
+      "id": "b2vg45ePN2YELkmWMyHdf1i0j",
+      "itemName": "Beers",
+      "expenseImageUrl": "https://img.favpng.com/16/1/21/euclidean-vector-shopping-cart-icon-png-favpng-ghFUJmh1QzFa9DLPysrWc4gm8.jpg",
+      "expenseDate": 1580111320179,
+      "amountPaid": 1000,
+      "currency": "USD",
+      "groupId": "luKasxuFEqbqkagEe00q",
+      "expenseOwner": "3qOzMCDPq6d6VTfzMv7HkKm8ifo2",
+      "expenseSharedBy": {
+        "3qOzMCDPq6d6VTfzMv7HkKm8ifo2": 300,
+        "KppGjUJPjdXq3bAJ2HneiL3Her23": 400,
+        "81AcdqBlwiXemmLkBZqmTjDYsYk1": 300
+      }
+    }
+  }
+}

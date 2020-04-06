@@ -1,0 +1,87 @@
+{
+  "groups": {
+    "ML5KeWuu4V8AVjSFd1TQ": {
+      "id": "ML5KeWuu4V8AVjSFd1TQ",
+      "groupName": "Trip to Goa",
+      "groupDescription": "This group manages expenses for Goa Trip",
+      "currency": "INR",
+      "currencySymbol": "₹",
+      "groupAdmin": {
+        "0IkpreLTzQR8b5oXMgR1SV2EvWr2": {
+          "amount": -140,
+          "expenses": []
+        }
+      },
+      "groupMembers": {
+        "3qOzMCDPq6d6VTfzMv7HkKm8ifo2": {
+          "amount": 600,
+          "expenses": [
+            "b2vg45ePN2YELkmWMyHdf1i0j"
+          ]
+        },
+        "KppGjUJPjdXq3bAJ2HneiL3Her23": {
+          "amount": -160,
+          "expenses": [
+            "sYOb8HISfISexUjCXidG34nGzD72"
+          ]
+        },
+        "81AcdqBlwiXemmLkBZqmTjDYsYk1": {
+          "amount": -300,
+          "expenses": []
+        }
+      }
+    },
+    "luKasxuFEqbqkagEe00q": {
+      "id": "luKasxuFEqbqkagEe00q",
+      "groupName": "Weekend Expenses",
+      "groupDescription": "This group manages miscellaneous expenses on weekend",
+      "currency": "USD",
+      "currencySymbol": "$",
+      "groupAdmin": {
+        "3qOzMCDPq6d6VTfzMv7HkKm8ifo2": {
+          "amount": 100,
+          "expenses": [
+            "t8uXnaF6APN2YELkmWMyHgufK8s1"
+          ]
+        }
+      },
+      "groupMembers": {
+        "KppGjUJPjdXq3bAJ2HneiL3Her23": {
+          "amount": -50,
+          "expenses": []
+        },
+        "81AcdqBlwiXemmLkBZqmTjDYsYk1": {
+          "amount": -50,
+          "expenses": []
+        }
+      }
+    },
+    "pruKasxuFEqbqkagEe00q": {
+      "id": "pruKasxuFEqbqkagEe00q",
+      "groupName": "Saturday-Sunday Dinner",
+      "groupDescription": "This group manages dinner expenses on Sat-Sun",
+      "currency": "INR",
+      "currencySymbol": "₹",
+      "groupAdmin": {
+        "81AcdqBlwiXemmLkBZqmTjDYsYk1": {
+          "amount": 0,
+          "expenses": [
+            "oluXnaF6APN2YELkmWMyHgufK8s1"
+          ]
+        }
+      },
+      "groupMembers": {
+        "KppGjUJPjdXq3bAJ2HneiL3Her23": {
+          "amount": -110,
+          "expenses": []
+        },
+        "3qOzMCDPq6d6VTfzMv7HkKm8ifo2": {
+          "amount": 110,
+          "expenses": [
+            "jhYiF6APN2YELkmWMyHguf32j"
+          ]
+        }
+      }
+    }
+  }
+}

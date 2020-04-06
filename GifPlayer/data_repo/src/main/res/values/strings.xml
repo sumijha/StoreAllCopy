@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">data_repo</string>
+    <string name="text_you_pay">You will pay</string>
+    <string name="text_you_get">You will get</string>
+</resources>
